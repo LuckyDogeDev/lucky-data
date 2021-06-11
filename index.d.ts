@@ -4,8 +4,8 @@ import charts = require("./typings/charts");
 import exchange = require("./typings/exchange");
 import exchange_v1 = require("./typings/exchange_v1");
 import goldminer = require("./typings/goldminer");
-import bar = require("./typings/bar");
-import maker = require("./typings/maker");
+import alchemybench = require("./typings/alchemybench");
+import smelter = require("./typings/smelter");
 import timelock = require("./typings/timelock");
 import lockup = require("./typings/lockup");
 import utils = require("./typings/utils")
@@ -22,5 +22,5 @@ declare namespace LuckyData {
         target: Function;
     }, targetArguments?: any): Promise<any>;
 
-    export { goldnugget, blocks, charts, exchange, exchange_v1, goldminer, bar, maker, timelock, lockup, utils, alpine };
+    export { goldnugget, blocks, charts, exchange, exchange_v1, goldminer, alchemybench, smelter, timelock, lockup, utils, alpine };
 }

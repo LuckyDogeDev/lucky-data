@@ -43,12 +43,12 @@ The below all return a Promise that resolves with the requested results.
 34. `goldminer.apys({¹})` Gets pool info for all pools in GoldMiner including APYs.
 35. `goldminer.apys24h({¹})` Gets 24h pool info for all pools in GoldMiner including APYs.
 36. `exchange.stakedValue({¹, token_address})` Get pricing info for GoldMiner pool.
-37. `bar.info({¹})` Gets GoldNuggetBar contract info.
-38. `bar.user({¹, user_address})` Gets GoldNuggetBar data for specified user.
-39. `maker.info({¹})` Gets GoldNuggetMaker contract info.
-40. `maker.servings({²})` Gets past servings to the bar.
-41. `maker.servers({¹})` Gets servers that have served GoldNugget to the bar.
-42. `maker.pendingServings({¹})` Gets data on the servings ready to be served to the bar.
+37. `alchemybench.info({¹})` Gets AlchemyBench contract info.
+38. `alchemybench.user({¹, user_address})` Gets AlchemyBench data for specified user.
+39. `smelter.info({¹})` Gets Smelter contract info.
+40. `smelter.servings({²})` Gets past servings to the alchemybench.
+41. `smelter.servers({¹})` Gets servers that have served GoldNugget to the alchemybench.
+42. `smelter.pendingServings({¹})` Gets data on the servings ready to be served to the alchemybench.
 43. `timelock.queuedTxs({²})` Gets queued Timelock transactions.
 44. `timelock.canceledTxs({²})` Gets canceled Timelock transactions.
 45. `timelock.executedTxs({²})` Gets executed Timelock transactions.
@@ -70,8 +70,8 @@ The below all return an Observable that when subscribed to with an object.
 6. `exchange.observePairs()` Gets an observable for the top 1000 pairs (by liquidity in USD).
 7. `exchange.observeEthPrice()` Gets an observable for the current USD price of ETH.
 8. `exchange.observeFactory()` Gets an observable for the LuckySwap factory.
-9. `bar.observeInfo()` Gets an observable for GoldNuggetBar contract info.
-10. `maker.observePendingServings()` Gets an observable for pending servings.
+9. `alchemybench.observeInfo()` Gets an observable for AlchemyBench contract info.
+10. `smelter.observePendingServings()` Gets an observable for pending servings.
 
 ## Timeseries
 
@@ -80,9 +80,9 @@ The below all return an Observable that when subscribed to with an object.
 ## Example
 
 ```javascript
-const goldnuggetData = require('@luckyswap/lucky-data'); // common js
+const goldnuggetData = require('@luckyfinance/lucky-data'); // common js
 // or
-import goldnuggetData from '@luckyswap/lucky-data'; // es modules
+import goldnuggetData from '@luckyfinance/lucky-data'; // es modules
 
 // query and log resolved results
 goldnuggetData.goldminer
@@ -93,7 +93,7 @@ goldnuggetData.timelock
   .allTxs({minTimestamp: 1605239738, maxTimestamp: 1608239738})
   .then(txs => console.log(txs))
 
-goldnuggetData.bar
+goldnuggetData.alchemybench
   .user({user_address: '0x6684977bbed67e101bb80fc07fccfba655c0a64f'})
   .then(user => console.log(user))
 

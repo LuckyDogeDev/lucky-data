@@ -3,7 +3,7 @@ const { SubscriptionClient } = require('subscriptions-transport-ws');
 
 const { request, gql } = require('graphql-request');
 
-const { graphAPIEndpoints, graphWSEndpoints, barAddress } = require('./../constants')
+const { graphAPIEndpoints, graphWSEndpoints, alchemybenchAddress } = require('./../constants')
 const { timestampToBlock } = require('./../utils');
 
 module.exports = {
@@ -11,33 +11,33 @@ module.exports = {
         block = block ? block : timestamp ? (await timestampToBlock(timestamp)) : undefined;
         block = block ? `block: { number: ${block} }` : "";
 
-        const result = await request(graphAPIEndpoints.bar,
+        const result = await request(graphAPIEndpoints.alchemybench,
             gql`{
-                    bar(id: "${barAddress}", ${block}) {
+                    alchemybench(id: "${alchemybenchAddress}", ${block}) {
                         ${info.properties.toString()}
                     }
                 }`
         );
 
-        return info.callback(result.bar);
+        return info.callback(result.alchemybench);
     },
 
     observeInfo() {
         const query = gql`
             subscription {
-                bar(id: "${barAddress}") {
+                alchemybench(id: "${alchemybenchAddress}") {
                     ${info.properties.toString()}
                 }
         }`;
 
-        const client = new SubscriptionClient(graphWSEndpoints.bar, { reconnect: true, }, ws,);
+        const client = new SubscriptionClient(graphWSEndpoints.alchemybench, { reconnect: true, }, ws,);
         const observable = client.request({ query });
 
         return {
             subscribe({next, error, complete}) {
                 return observable.subscribe({
                     next(results) {
-                        next(info.callback(results.data.bar));
+                        next(info.callback(results.data.alchemybench));
                     },
                     error,
                     complete
@@ -52,7 +52,7 @@ module.exports = {
         block = block ? block : timestamp ? (await timestampToBlock(timestamp)) : undefined;
         block = block ? `block: { number: ${block} }` : "";
 
-        const result = await request(graphAPIEndpoints.bar,
+        const result = await request(graphAPIEndpoints.alchemybench,
             gql`{
                     user(id: "${user_address.toLowerCase()}", ${block}) {
                         ${user.properties.toString()}

@@ -1,11 +1,11 @@
 const pageResults = require('graph-results-pager');
 
 const ws = require('isomorphic-ws');
-const { SubscriptionClient } = require('subscriptions-transport-ws'); 
+const { SubscriptionClient } = require('subscriptions-transport-ws');
 
 const { request, gql } = require('graphql-request');
 
-const { graphAPIEndpoints, graphWSEndpoints, makerAddress } = require('./../constants')
+const { graphAPIEndpoints, graphWSEndpoints, smelterAddress } = require('./../constants')
 const { timestampToBlock } = require('./../utils')
 
 module.exports = {
@@ -13,20 +13,20 @@ module.exports = {
         block = block ? block : timestamp ? (await timestampToBlock(timestamp)) : undefined;
         block = block ? `block: { number: ${block} }` : "";
 
-        const result = await request(graphAPIEndpoints.maker,
+        const result = await request(graphAPIEndpoints.smelter,
             gql`{
-                    makers(first: 1, ${block}) {
+                    smelters(first: 1, ${block}) {
                         ${info.properties.toString()}
                     }
                 }`
         );
 
-        return info.callback(result.makers[0]);
+        return info.callback(result.smelters[0]);
     },
 
     servings({minTimestamp = undefined, maxTimestamp = undefined, minBlock = undefined, maxBlock = undefined, max = undefined} = {}) {
         return pageResults({
-            api: graphAPIEndpoints.maker,
+            api: graphAPIEndpoints.smelter,
             query: {
                 entity: 'servings',
                 selection: {
@@ -47,7 +47,7 @@ module.exports = {
 
     async servers({block = undefined, timestamp = undefined, max = undefined} = {}) {
         return pageResults({
-            api: graphAPIEndpoints.maker,
+            api: graphAPIEndpoints.smelter,
             query: {
                 entity: 'servers',
                 block: block ? { number: block } : timestamp ? { number: await timestampToBlock(timestamp) } : undefined,
@@ -56,7 +56,7 @@ module.exports = {
             max
         })
             .then(results => servers.callback(results))
-            .catch(err => console.log(err));        
+            .catch(err => console.log(err));
     },
 
     async pendingServings({block = undefined, timestamp = undefined, max = undefined} = {}) {
@@ -66,7 +66,7 @@ module.exports = {
                 entity: 'users',
                 selection: {
                     where: {
-                        id: `\\"${makerAddress}\\"`,
+                        id: `\\"${smelterAddress}\\"`,
                     },
                 },
                 block: block ? { number: block } : timestamp ? { number: await timestampToBlock(timestamp) } : undefined,
@@ -81,7 +81,7 @@ module.exports = {
     observePendingServings() {
         const query = gql`
             subscription {
-                users(first: 1000, where: {id: "${makerAddress}"}) {
+                users(first: 1000, where: {id: "${smelterAddress}"}) {
                     ${pendingServings.properties.toString()}
                 }
         }`;

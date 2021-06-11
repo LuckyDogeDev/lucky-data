@@ -12,8 +12,8 @@ const charts = require('./queries/charts');
 const exchange = require('./queries/exchange');
 const exchange_v1 = require('./queries/exchange_v1')
 const goldminer = require('./queries/goldminer');
-const bar = require('./queries/bar')
-const maker = require('./queries/maker')
+const alchemybench = require('./queries/alchemybench')
+const smelter = require('./queries/smelter')
 const timelock =  require('./queries/timelock');
 const lockup = require('./queries/lockup');
 const alpine = require('./queries/alpine');
@@ -28,8 +28,8 @@ module.exports = {
 	exchange,
 	exchange_v1,
 	goldminer,
-	bar,
-	maker,
+	alchemybench,
+	smelter,
 	timelock,
 	lockup,
 	alpine,
