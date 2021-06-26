@@ -1,7 +1,7 @@
 {
 	"name": "@luckyfinance/lucky-data",
 	"license": "MIT",
-	"version": "1.0.28",
+	"version": "1.1.0",
 	"author": "LuckySwap",
 	"main": "index",
 	"scripts": {
