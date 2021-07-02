@@ -1,7 +1,7 @@
 module.exports = {
     graphAPIEndpoints: {
         goldminer: 'https://api.thegraph.com/subgraphs/name/luckyswap/gold-miner',
-        smelter: 'https://api.thegraph.com/subgraphs/name/luckyswap/smelter',
+        alchemybench: 'https://api.thegraph.com/subgraphs/name/luckyswap/smelter',
         timelock: 'https://api.thegraph.com/subgraphs/name/luckyswap/goldnugget-timelock',
         smelter: 'https://api.thegraph.com/subgraphs/name/luckyswap/smelter',
         exchange: 'https://api.thegraph.com/subgraphs/name/luckyswap/exchange',
