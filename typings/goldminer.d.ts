@@ -5,7 +5,7 @@ type Info = {
     migrator: string;
     owner: string;
     startBlock: number;
-    goldnuggetPerBlock: number;
+    golnPerBlock: number;
     totalAllocPoint: number;
     poolCount: number;
     slpBalance: number;
@@ -42,8 +42,8 @@ type Pool = {
     lastUpdatedDate: Date,
     entryUSD: number,
     exitUSD: number,
-    goldnuggetHarvested: number,
-    goldnuggetHarvestedUSD: number
+    golnHarvested: number,
+    golnHarvestedUSD: number
 }
 
 export function pool({ block, timestamp, pool_id, pool_address }: {
@@ -91,8 +91,8 @@ type User = {
     rewardDebt: bigint,
     entryUSD: number,
     exitUSD: number,
-    goldnuggetHarvested: number,
-    goldnuggetHarvestedUSD: number,
+    golnHarvested: number,
+    golnHarvestedUSD: number,
 }
 
 export function user({ block, timestamp, user_address }: {
@@ -122,6 +122,6 @@ export function apys24h({ block, timestamp}?: {
     slpBalanceChangeCount: number,
     userCountChange: number,
     userCountChangeCount: number,
-    goldnuggetHarvestedChange: number,
-    goldnuggetHarvestedChangeCount: number
+    golnHarvestedChange: number,
+    golnHarvestedChangeCount: number
 })[]>;

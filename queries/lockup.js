@@ -35,9 +35,9 @@ const user = {
         'amount',
         'rewardDebt',
         'pool { id, balance, accGoldNuggetPerShare }',
-        'goldnuggetAtLockup',
-        'goldnuggetHarvestedSinceLockup',
-        'goldnuggetLocked',
+        'golnAtLockup',
+        'golnHarvestedSinceLockup',
+        'golnLocked',
     ],
 
     callback(results) {
@@ -51,9 +51,9 @@ const user = {
                 balance: Number(entry.pool.balance),
                 accGoldNuggetPerShare: BigInt(entry.pool.accGoldNuggetPerShare)
             },
-            goldnuggetAtLockup: Number(entry.goldnuggetAtLockup),
-            goldnuggetHarvestedSinceLockup: Number(entry.goldnuggetHarvestedSinceLockup),
-            goldnuggetLocked: Number(entry.goldnuggetLocked),
+            golnAtLockup: Number(entry.golnAtLockup),
+            golnHarvestedSinceLockup: Number(entry.golnHarvestedSinceLockup),
+            golnLocked: Number(entry.golnLocked),
         }));
     }
 };

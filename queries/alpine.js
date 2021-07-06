@@ -2,7 +2,7 @@ const pageResults = require('graph-results-pager')
 
 const { request, gql } = require('graphql-request')
 
-const { priceUSD: goldnuggetPriceUSD } = require('./goldnugget')
+const { priceUSD: golnPriceUSD } = require('./goln')
 const { token: tokenInfo } = require('./exchange')
 const { ethPrice: ethPriceUSD } = require('./exchange')
 const { info: goldMinerInfo } = require('./goldminer')
@@ -51,12 +51,12 @@ module.exports = {
     })
 
     let result = {}
-    result.goldnuggetUSD = await goldnuggetPriceUSD();
+    result.golnUSD = await golnPriceUSD();
     result.ethUSD = await ethPriceUSD();
 
     let goldMiner = await goldMinerInfo();
     result.totalAP = goldMiner.totalAllocPoint;
-    result.goldnuggetPerBlock = goldMiner.goldnuggetPerBlock;
+    result.golnPerBlock = goldMiner.golnPerBlock;
 
     let pools = await minerPools();
     let onsen_pools = pools.map(pool => pool.pair)
@@ -100,8 +100,8 @@ const goldveinStakedInfo = {
       if (assetPool === undefined) { return }
       let stakedAmt = assetPool.slpBalance * 1e18;
       let balanceUSD = (stakedAmt * asset.derivedETH * results.ethUSD) / (10 ** result.asset.decimals);
-      let rewardPerBlock = ((1 / results.totalAP) * results.goldnuggetPerBlock);
-      let roiPerBlock = (rewardPerBlock * results.goldnuggetUSD) / balanceUSD;
+      let rewardPerBlock = ((1 / results.totalAP) * results.golnPerBlock);
+      let roiPerBlock = (rewardPerBlock * results.golnUSD) / balanceUSD;
       let roiPerYear = roiPerBlock * 6500 * 365
 
       return {

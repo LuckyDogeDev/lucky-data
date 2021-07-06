@@ -8,9 +8,9 @@ type User = {
         balance: number,
         accGoldNuggetPerShare: bigint
     },
-    goldnuggetAtLockup: number,
-    goldnuggetHarvestedSinceLockup: number,
-    goldnuggetLocked: number,
+    golnAtLockup: number,
+    golnHarvestedSinceLockup: number,
+    golnLocked: number,
 }
 
 export function user({ block, timestamp, user_address }: {

@@ -6,7 +6,7 @@ const { Promise } = require('bluebird')
 
 const { graphAPIEndpoints } = require('./constants')
 
-const goldnugget = require('./queries/goldnugget');
+const goln = require('./queries/goln');
 const blocks = require('./queries/blocks');
 const charts = require('./queries/charts');
 const exchange = require('./queries/exchange');
@@ -22,7 +22,7 @@ const utils = require('./utils');
 module.exports = {
 	pageResults,
 	graphAPIEndpoints,
-	goldnugget,
+	goln,
 	blocks,
 	charts,
 	exchange,

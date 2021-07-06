@@ -1,16 +1,16 @@
 type Info = {
     decimals: number;
     name: string;
-    goldnugget: string;
+    goln: string;
     symbol: string;
     totalSupply: number;
     ratio: number;
     PlatinumNuggetMinted: number;
     PlatinumNuggetBurned: number;
-    goldnuggetStaked: number;
-    goldnuggetStakedUSD: number;
-    goldnuggetHarvested: number;
-    goldnuggetHarvestedUSD: number;
+    golnStaked: number;
+    golnStakedUSD: number;
+    golnHarvested: number;
+    golnHarvestedUSD: number;
     PlatinumNuggetAge: number;
     PlatinumNuggetAgeDestroyed: number;
     updatedAt: number;
@@ -40,16 +40,16 @@ type User = {
     PlatinumNuggetOffset: number;
     PlatinumNuggetAge: number;
     PlatinumNuggetAgeDestroyed: number;
-    goldnuggetStaked: number;
-    goldnuggetStakedUSD: number;
-    goldnuggetHarvested: number;
-    goldnuggetHarvestedUSD: number;
-    goldnuggetIn: number;
-    goldnuggetOut: number;
+    golnStaked: number;
+    golnStakedUSD: number;
+    golnHarvested: number;
+    golnHarvestedUSD: number;
+    golnIn: number;
+    golnOut: number;
     usdOut: number;
     usdIn: number;
     updatedAt: number;
-    goldnuggetOffset: number;
+    golnOffset: number;
     usdOffset: number;
 }
 

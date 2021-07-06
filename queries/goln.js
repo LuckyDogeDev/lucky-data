@@ -5,7 +5,7 @@ const { SubscriptionClient } = require('subscriptions-transport-ws');
 
 const { gql } = require('graphql-request');
 
-const { graphAPIEndpoints, graphWSEndpoints, goldnuggetAddress } = require('./../constants')
+const { graphAPIEndpoints, graphWSEndpoints, golnAddress } = require('./../constants')
 const { timestampToBlock } = require('./../utils')
 
 const { ethPrice } = require('./exchange')
@@ -22,7 +22,7 @@ module.exports = {
                 entity: 'tokens',
                 selection: {
                     where: {
-                        id: `\\"${goldnuggetAddress}\\"`,
+                        id: `\\"${golnAddress}\\"`,
                     },
                     block: block ? { number: block } : timestamp ? { number: await timestampToBlock(timestamp) } : undefined,
                 },
@@ -36,7 +36,7 @@ module.exports = {
     observePriceETH() {
         const query = gql`
             subscription {
-                    token(id: "${goldnuggetAddress}") {
+                    token(id: "${golnAddress}") {
                         derivedETH
                     }
         }`;

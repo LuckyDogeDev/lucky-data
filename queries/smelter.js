@@ -106,13 +106,13 @@ module.exports = {
 const info = {
     properties: [
         'id',
-        'goldnuggetServed'
+        'golnServed'
     ],
 
     callback(results) {
         return ({
             address: results.id,
-            goldnuggetServed: Number(results.goldnuggetServed)
+            golnServed: Number(results.golnServed)
         });
     }
 }
@@ -124,19 +124,19 @@ const servings = {
         'pair',
         'token0',
         'token1',
-        'goldnuggetServed',
+        'golnServed',
         'block',
         'timestamp'
     ],
 
     callback(results) {
-        return results.map(({ server, tx, pair, token0, token1, goldnuggetServed, block, timestamp }) => ({
+        return results.map(({ server, tx, pair, token0, token1, golnServed, block, timestamp }) => ({
             serverAddress: server.id,
             tx: tx,
             pair: pair,
             token0: token0,
             token1: token1,
-            goldnuggetServed: Number(goldnuggetServed),
+            golnServed: Number(golnServed),
             block: Number(block),
             timestamp: Number(timestamp * 1000),
             date: new Date(timestamp * 1000)
@@ -147,19 +147,19 @@ const servings = {
 const servers = {
     properties: [
         'id',
-        'goldnuggetServed',
-        'servings(first: 1000, orderBy: block, orderDirection: desc) { tx, block, pair, goldnuggetServed }'
+        'golnServed',
+        'servings(first: 1000, orderBy: block, orderDirection: desc) { tx, block, pair, golnServed }'
     ],
 
     callback(results) {
-        return results.map(({ id, goldnuggetServed, servings }) => ({
+        return results.map(({ id, golnServed, servings }) => ({
             serverAddress: id,
-            goldnuggetServed: Number(goldnuggetServed),
-            servings: servings.map(({ tx, block, pair, goldnuggetServed}) => ({
+            golnServed: Number(golnServed),
+            servings: servings.map(({ tx, block, pair, golnServed}) => ({
                 tx,
                 block: Number(block),
                 pair,
-                goldnuggetServed: Number(goldnuggetServed)
+                golnServed: Number(golnServed)
             })),
         }));
     }

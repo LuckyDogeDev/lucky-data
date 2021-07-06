@@ -7,8 +7,8 @@ data has been indexed by the Graph via the subgraph the LuckySwap team maintains
 
 The below all return a Promise that resolves with the requested results.
 
-1. `goldnugget.priceUSD({¹})` Gets USD price of GoldNugget.
-2. `goldnugget.priceETH({¹})` Gets ETH price of GoldNugget.
+1. `goln.priceUSD({¹})` Gets USD price of GoldNugget.
+2. `goln.priceETH({¹})` Gets ETH price of GoldNugget.
 3. `blocks.latestBlock()` Gets the latest block.
 4. `blocks.getBlock({¹})` Gets data for the specified block.
 5. `charts.factory()` Gets data for the LuckySwap factory broken down daily + weekly.
@@ -62,7 +62,7 @@ The below all return a Promise that resolves with the requested results.
 ## Supported Subscriptions
 The below all return an Observable that when subscribed to with an object.
 
-1. `goldnugget.observePriceETH()` Gets an observable of the current ETH price of GoldNugget.
+1. `goln.observePriceETH()` Gets an observable of the current ETH price of GoldNugget.
 2. `blocks.observeLatestBlock()` Gets an observable of the latest block.
 3. `exchange.observeToken({token_address})` Gets an observable for specified token.
 4. `exchange.observeTokens()` Gets an observable for the top 1000 tokens (by volume in USD).
@@ -75,32 +75,32 @@ The below all return an Observable that when subscribed to with an object.
 
 ## Timeseries
 
-`goldnuggetData.timeseries({blocks = [], timestamps = [], target = targetFunction}, {targetArguments})` Returns an array of queries. Blocks / timestamps are arrays of the blocks / timestamps to query (choose one). The target is the target function, the target arguments are the arguments for the target. See example below
+`golnData.timeseries({blocks = [], timestamps = [], target = targetFunction}, {targetArguments})` Returns an array of queries. Blocks / timestamps are arrays of the blocks / timestamps to query (choose one). The target is the target function, the target arguments are the arguments for the target. See example below
 
 ## Example
 
 ```javascript
-const goldnuggetData = require('@luckyfinance/lucky-data'); // common js
+const golnData = require('@luckyfinance/lucky-data'); // common js
 // or
-import goldnuggetData from '@luckyfinance/lucky-data'; // es modules
+import golnData from '@luckyfinance/lucky-data'; // es modules
 
 // query and log resolved results
-goldnuggetData.goldminer
+golnData.goldminer
   .pools({block: 11223344})
   .then(pools => console.log(pools))
 
-goldnuggetData.timelock
+golnData.timelock
   .allTxs({minTimestamp: 1605239738, maxTimestamp: 1608239738})
   .then(txs => console.log(txs))
 
-goldnuggetData.alchemybench
+golnData.alchemybench
   .user({user_address: '0x6684977bbed67e101bb80fc07fccfba655c0a64f'})
   .then(user => console.log(user))
 
-goldnuggetData.exchange
+golnData.exchange
   .observePairs()
   .subscribe({next: (pairs) => console.log(pairs), error: (err) => console.log(err)})
 
-goldnuggetData
-  .timeseries({blocks: [11407623, 11507623, 11607623], target: goldnuggetData.exchange.pair}, {pair_address: "0x795065dCc9f64b5614C407a6EFDC400DA6221FB0"})
+golnData
+  .timeseries({blocks: [11407623, 11507623, 11607623], target: golnData.exchange.pair}, {pair_address: "0x795065dCc9f64b5614C407a6EFDC400DA6221FB0"})
 ```

@@ -6,7 +6,7 @@ const { graphAPIEndpoints, minerAddress, TWENTY_FOUR_HOURS } = require('./../con
 const { timestampToBlock, getAverageBlockTime } = require('./../utils');
 
 const { pairs: exchangePairs } = require('./exchange');
-const { priceUSD: goldnuggetPriceUSD } = require('./goldnugget');
+const { priceUSD: golnPriceUSD } = require('./goln');
 
 module.exports = {
     async info({block = undefined, timestamp = undefined} = {}) {
@@ -124,7 +124,7 @@ module.exports = {
     async apys({block = undefined, timestamp = undefined} = {}) {
         const goldminerList = await module.exports.pools({block, timestamp});
         const exchangeList = await exchangePairs({block, timestamp});
-        const goldnuggetUSD = await goldnuggetPriceUSD({block, timestamp});
+        const golnUSD = await golnPriceUSD({block, timestamp});
 
         const totalAllocPoint = goldminerList.reduce((a, b) => a + b.allocPoint, 0);
 
@@ -137,8 +137,8 @@ module.exports = {
             }
 
             const tvl = goldminerPool.slpBalance * (exchangePool.reserveUSD / exchangePool.totalSupply);
-            const goldnuggetPerBlock = (goldminerPool.allocPoint / (totalAllocPoint) * 100);
-            const apy = goldnuggetUSD * (goldnuggetPerBlock * (60 / averageBlockTime) * 60 * 24 * 365) / tvl * 100;
+            const golnPerBlock = (goldminerPool.allocPoint / (totalAllocPoint) * 100);
+            const apy = golnUSD * (golnPerBlock * (60 / averageBlockTime) * 60 * 24 * 365) / tvl * 100;
 
             return {...goldminerPool, apy};
         });
@@ -168,8 +168,8 @@ const info = {
         'migrator',
         'owner',
         'startBlock',
-        'goldnugget',
-        'goldnuggetPerBlock',
+        'goln',
+        'golnPerBlock',
         'totalAllocPoint',
         'poolCount',
         'slpBalance',
@@ -188,7 +188,7 @@ const info = {
             migrator: results.migrator,
             owner: results.owner,
             startBlock: Number(results.startBlock),
-            goldnuggetPerBlock: results.goldnuggetPerBlock / 1e18,
+            golnPerBlock: results.golnPerBlock / 1e18,
             totalAllocPoint: Number(results.totalAllocPoint),
             poolCount: Number(results.poolCount),
             slpBalance: Number(results.slpBalance),
@@ -220,12 +220,12 @@ const pools = {
         'updatedAt',
         'entryUSD',
         'exitUSD',
-        'goldnuggetHarvested',
-        'goldnuggetHarvestedUSD'
+        'golnHarvested',
+        'golnHarvestedUSD'
     ],
 
     callback(results) {
-        return results.map(({ id, pair, allocPoint, lastRewardBlock, accGoldNuggetPerShare, balance, userCount, slpBalance, slpAge, slpAgeRemoved, slpDeposited, slpWithdrawn, timestamp, block, updatedAt, entryUSD, exitUSD, goldnuggetHarvested, goldnuggetHarvestedUSD }) => ({
+        return results.map(({ id, pair, allocPoint, lastRewardBlock, accGoldNuggetPerShare, balance, userCount, slpBalance, slpAge, slpAgeRemoved, slpDeposited, slpWithdrawn, timestamp, block, updatedAt, entryUSD, exitUSD, golnHarvested, golnHarvestedUSD }) => ({
             id: Number(id),
             pair: pair,
             allocPoint: Number(allocPoint),
@@ -244,8 +244,8 @@ const pools = {
             lastUpdatedDate: new Date(updatedAt * 1000),
             entryUSD: Number(entryUSD),
             exitUSD: Number(exitUSD),
-            goldnuggetHarvested: Number(goldnuggetHarvested),
-            goldnuggetHarvestedUSD: Number(goldnuggetHarvestedUSD)
+            golnHarvested: Number(golnHarvested),
+            golnHarvestedUSD: Number(golnHarvestedUSD)
          }));
     }
 };
@@ -277,8 +277,8 @@ const user = {
         'rewardDebt',
         'entryUSD',
         'exitUSD',
-        'goldnuggetHarvested',
-        'goldnuggetHarvestedUSD',
+        'golnHarvested',
+        'golnHarvestedUSD',
     ],
 
     callback(results) {
@@ -297,8 +297,8 @@ const user = {
             rewardDebt: BigInt(entry.rewardDebt),
             entryUSD: Number(entry.entryUSD),
             exitUSD: Number(entry.exitUSD),
-            goldnuggetHarvested: Number(entry.goldnuggetHarvested),
-            goldnuggetHarvestedUSD: Number(entry.goldnuggetHarvestedUSD),
+            golnHarvested: Number(entry.golnHarvested),
+            golnHarvestedUSD: Number(entry.golnHarvestedUSD),
         }));
     }
 };
@@ -317,8 +317,8 @@ const apys = {
                 userCountChange: (result.userCount / result24h.userCount) * 100 - 100,
                 userCountChangeCount: result.userCount - result24h.userCount,
 
-                goldnuggetHarvestedChange: (result.goldnuggetHarvested / result24h.goldnuggetHarvested) * 100 - 100,
-                goldnuggetHarvestedChangeCount: result.goldnuggetHarvested - result24h.goldnuggetHarvested,
+                golnHarvestedChange: (result.golnHarvested / result24h.golnHarvested) * 100 - 100,
+                golnHarvestedChangeCount: result.golnHarvested - result24h.golnHarvested,
             });
         });
     }

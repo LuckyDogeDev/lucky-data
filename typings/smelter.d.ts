@@ -1,6 +1,6 @@
 type Info = {
     address: string;
-    goldnuggetServed: number;
+    golnServed: number;
 }
 
 export function info({ block, timestamp }?: {
@@ -16,7 +16,7 @@ type Servings = {
     pair: string,
     token0: string,
     token1: string,
-    goldnuggetServed: number,
+    golnServed: number,
     block: number,
     timestamp: number,
     date: Date
@@ -34,12 +34,12 @@ export function servings({ minTimestamp, maxTimestamp, minBlock, maxBlock, max }
 
 type Servers = {
     serverAddress: string,
-    goldnuggetServed: number,
+    golnServed: number,
     servings: {
         tx: string,
         block: number,
         pair: string,
-        goldnuggetServed: number
+        golnServed: number
     }[]
 }
 
