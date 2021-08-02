@@ -1,7 +1,7 @@
 {
   "name": "@luckyfinance/lucky-data",
   "license": "MIT",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "author": "LuckySwap",
   "main": "index",
   "scripts": {
@@ -18,9 +18,9 @@
     "graphql": "14.5.8",
     "graphql-request": "^3.4.0",
     "isomorphic-ws": "^4.0.1",
-    "node-fetch": "2.6.0",
+    "node-fetch": "^2.6.1",
     "subscriptions-transport-ws": "0.9.16",
-    "ws": "7.2.0"
+    "ws": "^7.5.3"
   },
   "devDependencies": {
     "eslint": "5.16.0",
